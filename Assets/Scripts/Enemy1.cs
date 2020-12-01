@@ -25,6 +25,14 @@ public class Enemy1 : MonoBehaviour
       
     }
 
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.CompareTag("knight"))
+        {
+            LifeController.instance.DecrementarLife(1);
+        }
+    }
+
     // Update is called once per frame
     void FixedUpdate()
     {
@@ -34,4 +42,6 @@ public class Enemy1 : MonoBehaviour
     {
         Destroy(this.gameObject);
     }
+
+
 }

@@ -1,5 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
+using TMPro.EditorUtilities;
 
 public class KnightController : MonoBehaviour
 {
@@ -9,9 +11,13 @@ public class KnightController : MonoBehaviour
 	Vector2 velocidade;
 	bool ladoDireito = true;
 	[SerializeField]
-    private int life = 500; 
-	[SerializeField]
 	private float speed = 10;
+	private GameObject instantiatedObj;
+
+
+
+	public GameObject prefabDashedsword1;
+	
 
 	// Use this for initialization
 	void Start () {
@@ -29,28 +35,22 @@ public class KnightController : MonoBehaviour
 		
 		velocidade = new Vector2 (axis * speed, GetComponent<Rigidbody2D>().velocity.y);
 
-		GetComponent<Rigidbody2D>().velocity = velocidade;
-
-        if(life<=0){
-            print("Você está morreu!");
-            Destroy(this.gameObject);
-        }
+		GetComponent<Rigidbody2D>().velocity = velocidade;        
 	}
 
-    void OnTriggerEnter2D(Collider2D other)
-    {        
-        if (other.tag == "enemy1"){
-            life = life -200;            
-        }
-
-        if (other.tag == "enemy2"){
-            life = life -100;            
-        }
-    }
+    
 
 	// Update is called once per frame
 	void Update () {
+		if (Input.GetMouseButtonDown(0))
+		{
 
+			instantiatedObj = (GameObject)Instantiate(prefabDashedsword1, transform.position + new Vector3(2, -0.10f, -0.9f), Quaternion.identity);
+
+			
+			Destroy(instantiatedObj, 0.08f);
+		
+		}
 	}
 
 	void Vire(){
@@ -60,4 +60,6 @@ public class KnightController : MonoBehaviour
 
 		transform.localScale = novoScale;
 	}
+
+	
 }
