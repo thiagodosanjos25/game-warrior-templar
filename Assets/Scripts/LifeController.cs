@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class LifeController : MonoBehaviour
 {
@@ -31,6 +32,7 @@ public class LifeController : MonoBehaviour
             life = 0;
             print("Você está morreu!");
             Destroy(this.gameObject);
+            SceneManager.LoadScene("GameOver");
         }
         LifeControllerUI.instance.UpdateLifeUI();
     }
